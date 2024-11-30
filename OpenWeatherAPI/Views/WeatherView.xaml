@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OpenWeatherAPI.Views.WeatherView"
+             Title="Previsão do tempo"
+             BackgroundImageSource="ceu2.jpg">
+
+    <VerticalStackLayout Padding="30,0" Spacing="25">
+        <Frame BackgroundColor="#B7D5E5"
+               Padding="0"
+               Margin="0,100,0,0"
+               BorderColor="White"
+               CornerRadius="10"
+               HasShadow="False"
+               WidthRequest="{OnIdiom Desktop=450}"
+               HeightRequest="{OnIdiom Desktop=400}">
+
+            <VerticalStackLayout Spacing="30" HorizontalOptions="Center">
+                <Frame BackgroundColor="white"
+                       Padding="0"
+                       BorderColor="Transparent" 
+                       CornerRadius="10"
+                       HasShadow="False"
+                       Margin="0,30,0,0"
+                       WidthRequest="{OnIdiom Desktop=400}"
+                       HeightRequest="{OnIdiom Desktop=45}">
+                    <AbsoluteLayout>
+                        <Entry Text ="{Binding CityName}"
+                               Placeholder="Insira o nome da sua cidade..."
+                               PlaceholderColor="black" 
+                               FontSize="{OnIdiom Desktop=16}"
+                               TextColor="black" 
+                               WidthRequest="{OnIdiom Desktop=300}"
+                               HeightRequest="{OnIdiom Desktop=45}"
+                               BackgroundColor="white"
+                               />
+                        <!-- HorizontalOptions="Center" -->
+                        <!-- VerticalOptions="Center" -->
+
+                        <Button Text="Pesquisar" 
+                                Command="{Binding getCityWeather}"
+                                WidthRequest="{OnIdiom Desktop=100}"
+                                BackgroundColor="#084D6E"
+                                Margin="300,0,0,0"
+                                />
+
+                    </AbsoluteLayout>
+                </Frame>
+
+                <!-- Nome da cidade explícito no resultado: Binding{CityName} -->
+                <Label Text="{Binding CityName}"
+                       FontSize="{OnIdiom Desktop=30}"
+                       TextColor="white"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                    />
+
+                <!-- Ensolarado -->
+                <Label Text="{Binding WeatherForecast}"
+                       FontSize="{OnIdiom Desktop=21}"
+                       TextColor="white"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       />
+
+                <!-- 32°C -->
+                <Label Text="{Binding DegreesCelsius}"
+                       FontSize="{OnIdiom Desktop=21}"
+                       TextColor="white"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       />
+
+                <!-- Umidade: 37% -->
+                <Label Text="{Binding Humidity}"
+                       FontSize="{OnIdiom Desktop=21}"
+                       TextColor="white"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                    />
+
+                <!-- Vento: 16 km/h -->
+                <Label Text="{Binding Wind}"
+                       FontSize="{OnIdiom Desktop=21}"
+                       TextColor="white"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                    />
+
+            </VerticalStackLayout>
+        </Frame>
+
+    </VerticalStackLayout>
+</ContentPage>
