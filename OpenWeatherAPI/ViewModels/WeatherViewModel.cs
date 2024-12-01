@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+//using AuthenticationServices;
 //using AndroidX.Core.Util;
 
 namespace OpenWeatherAPI.ViewModels
@@ -28,8 +29,14 @@ namespace OpenWeatherAPI.ViewModels
         public string degreesCelsius;
 
         [ObservableProperty]
+        public string thermalSensation;
+
+        [ObservableProperty]
         public string humidity;
 
+        
+        
+        
         [ObservableProperty]
         public string wind;
 
@@ -39,25 +46,58 @@ namespace OpenWeatherAPI.ViewModels
 
         public WeatherViewModel()
         {
-            getCityWeather = new Command(getWeather);
+            getCityWeather = new Command(GetWeather);
             weatherService = new WeatherService();
         }
 
-        public async void getWeather()
+        public async void GetWeather()
         {
             WeatherResponse = await weatherService.GetWeatherResponse(cityName);
 
             CityName = cityName;
 
-            WeatherForecast = WeatherResponse.Weather[0].Description;
+            if (MainTranslations.TryGetValue(WeatherResponse.weather[0].main, out string translation))
+            {
+                WeatherForecast = translation; //Tradução encontrada no dicionário
+            }
+            else
+            {
+                WeatherForecast = "Previsão desconhecida"; //Tradução não encontrada
+            }
 
-            DegreesCelsius = Math.Round(WeatherResponse.Main.Temp).ToString() + "ºC";
+            DegreesCelsius = Math.Round(WeatherResponse.main.temp).ToString() + "ºC";
 
-            Humidity = WeatherResponse.Main.Humidity.ToString() + "%";
+            ThermalSensation = Math.Round(WeatherResponse.main.feels_like).ToString() + "ºC";
 
-            Wind = WeatherResponse.Wind.Speed.ToString() + "km/h";
+            Humidity = WeatherResponse.main.humidity.ToString() + "%";
+
+            Wind = WeatherResponse.wind.speed.ToString() + "km/h";
 
         }
+
+
+        private static readonly Dictionary<string, string> MainTranslations = new()
+        {
+            {"Thunderstorm", "Trovoadas"},
+            {"Drizzle", "Garoa"},
+            {"Rain", "Chuva"},
+            {"Snow", "Neve" },
+            {"Mist", "Névoa"},
+            {"Smoke", "Fumaça"},
+            {"Haze", "Neblina"},
+            {"Dust", "Nuvens ou Redemoinhos de Poeira"},
+            {"Fog", "Nevoeiro"},
+            {"Sand", "Tempestade de Areia"},
+            {"Ash", "Cinzas Vulcânicas"},
+            {"Squall", "Rajadas de Vento"},
+            {"Tornado", "Tornado"},
+            {"Clear", "Céu limpo"},
+            {"Clouds", "Com Nuvens"},
+        };
+
+        //public string ConvertKelvinToCelsius(double kelvin){
+            //double celsius = kelvin - 273;
+            //return Math.Round(celsius).ToString() + "ºC"; }
 
     }
 }

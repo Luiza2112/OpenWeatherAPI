@@ -4,16 +4,16 @@
              x:Class="OpenWeatherAPI.Views.WeatherView"
              Title="Previsão do tempo"
              BackgroundImageSource="ceu2.jpg">
-
+    <!---B7D5E5-->
     <VerticalStackLayout Padding="30,0" Spacing="25">
-        <Frame BackgroundColor="#B7D5E5"
+        <Frame BackgroundColor="#9CC4DF"
                Padding="0"
                Margin="0,100,0,0"
                BorderColor="White"
                CornerRadius="10"
                HasShadow="False"
                WidthRequest="{OnIdiom Desktop=450}"
-               HeightRequest="{OnIdiom Desktop=400}">
+               HeightRequest="{OnIdiom Desktop=450}">
 
             <VerticalStackLayout Spacing="30" HorizontalOptions="Center">
                 <Frame BackgroundColor="white"
@@ -38,9 +38,9 @@
                         <!-- VerticalOptions="Center" -->
 
                         <Button Text="Pesquisar" 
-                                Command="{Binding getCityWeather}"
+                                Command="{Binding GetCityWeather}"
                                 WidthRequest="{OnIdiom Desktop=100}"
-                                BackgroundColor="#084D6E"
+                                BackgroundColor="#3F87BC"
                                 Margin="300,0,0,0"
                                 />
 
@@ -49,7 +49,7 @@
 
                 <!-- Nome da cidade explícito no resultado: Binding{CityName} -->
                 <Label Text="{Binding CityName}"
-                       FontSize="{OnIdiom Desktop=30}"
+                       FontSize="{OnIdiom Desktop=40}"
                        TextColor="white"
                        FontAttributes="Bold"
                        HorizontalOptions="Center"
@@ -61,7 +61,7 @@
                        FontSize="{OnIdiom Desktop=21}"
                        TextColor="white"
                        FontAttributes="Bold"
-                       HorizontalOptions="Center"
+                       HorizontalOptions="Start"
                        VerticalOptions="Center"
                        />
 
@@ -70,16 +70,25 @@
                        FontSize="{OnIdiom Desktop=21}"
                        TextColor="white"
                        FontAttributes="Bold"
-                       HorizontalOptions="Center"
+                       HorizontalOptions="Start"
                        VerticalOptions="Center"
                        />
+
+                <!-- 35° -->
+                <Label Text="{Binding ThermalSensation}"
+                       FontSize="{OnIdiom Desktop=21}"
+                       TextColor="white"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       />   
 
                 <!-- Umidade: 37% -->
                 <Label Text="{Binding Humidity}"
                        FontSize="{OnIdiom Desktop=21}"
                        TextColor="white"
                        FontAttributes="Bold"
-                       HorizontalOptions="Center"
+                       HorizontalOptions="Start"
                        VerticalOptions="Center"
                     />
 
@@ -88,7 +97,7 @@
                        FontSize="{OnIdiom Desktop=21}"
                        TextColor="white"
                        FontAttributes="Bold"
-                       HorizontalOptions="Center"
+                       HorizontalOptions="Start"
                        VerticalOptions="Center"
                     />
 

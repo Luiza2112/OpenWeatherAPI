@@ -49,7 +49,9 @@ namespace OpenWeatherAPI.Services
             }
             catch(Exception e)
             {
-                Debug.WriteLine(e.Message);
+                Debug.WriteLine($"Erro ao obter dados da API: {e.Message}");
+                return new WeatherResponse(); // Retorna um objeto inicializado em caso de falha.
+                //Debug.WriteLine(e.Message);
             }
             return weatherResponse;
         }

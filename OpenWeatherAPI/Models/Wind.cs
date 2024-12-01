@@ -8,8 +8,8 @@ namespace OpenWeatherAPI.Models
 {
     public class Wind
     {
-        public double Speed { get; set; }
-        public int Deg { get; set; }
-        public double Gust { get; set; }
+        public double speed { get; set; }
+        public int deg { get; set; }
+        public double gust { get; set; }
     }
 }

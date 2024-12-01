@@ -8,7 +8,7 @@ namespace OpenWeatherAPI.Models
 {
     public class Coord
     {
-        public double Lon;
-        public double Lat;
+        public double Lon { get; set; }
+        public double Lat { get; set; }
     }
 }
