@@ -26,6 +26,9 @@ namespace OpenWeatherAPI.ViewModels
         public string weatherForecast;
 
         [ObservableProperty]
+        public string weatherIcon = "nuvem.png";
+
+        [ObservableProperty]
         public string degreesCelsius;
 
         [ObservableProperty]
@@ -33,20 +36,17 @@ namespace OpenWeatherAPI.ViewModels
 
         [ObservableProperty]
         public string humidity;
-
-        
-        
         
         [ObservableProperty]
         public string wind;
 
         WeatherService weatherService;
 
-        public ICommand getCityWeather { get; }
-
+        public ICommand GetCityWeather { get; }
+        //if (weatherIcon == null){WeatherIcon = "nuvem.jpg";}
         public WeatherViewModel()
         {
-            getCityWeather = new Command(GetWeather);
+            GetCityWeather = new Command(GetWeather);
             weatherService = new WeatherService();
         }
 
@@ -65,16 +65,17 @@ namespace OpenWeatherAPI.ViewModels
                 WeatherForecast = "Previsão desconhecida"; //Tradução não encontrada
             }
 
-            DegreesCelsius = Math.Round(WeatherResponse.main.temp).ToString() + "ºC";
+            WeatherIcon = GetWeatherIcon(WeatherResponse.weather[0].icon);
 
-            ThermalSensation = Math.Round(WeatherResponse.main.feels_like).ToString() + "ºC";
+            DegreesCelsius = Math.Round(WeatherResponse.main.temp - 273).ToString() + "ºC";
+            //Converter de Kelvin para Celcius
+            ThermalSensation = Math.Round(WeatherResponse.main.feels_like - 273).ToString() + "ºC";
 
             Humidity = WeatherResponse.main.humidity.ToString() + "%";
 
             Wind = WeatherResponse.wind.speed.ToString() + "km/h";
 
         }
-
 
         private static readonly Dictionary<string, string> MainTranslations = new()
         {
@@ -95,9 +96,10 @@ namespace OpenWeatherAPI.ViewModels
             {"Clouds", "Com Nuvens"},
         };
 
-        //public string ConvertKelvinToCelsius(double kelvin){
-            //double celsius = kelvin - 273;
-            //return Math.Round(celsius).ToString() + "ºC"; }
+        public string GetWeatherIcon(string iconCode)
+        {
+            return $"https://openweathermap.org/img/wn/{iconCode}@2x.png";
+        }
 
     }
 }

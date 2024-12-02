@@ -20,8 +20,6 @@ namespace OpenWeatherAPI.Services
 
         private HttpClient httpClient;
 
-        //private List<Weather> weather;
-
         private JsonSerializerOptions JsonSerializerOptions;
 
         public WeatherService()
@@ -50,10 +48,55 @@ namespace OpenWeatherAPI.Services
             catch(Exception e)
             {
                 Debug.WriteLine($"Erro ao obter dados da API: {e.Message}");
-                return new WeatherResponse(); // Retorna um objeto inicializado em caso de falha.
+                return new WeatherResponse(); //Retorna um objeto inicializado em caso de falha.
                 //Debug.WriteLine(e.Message);
             }
             return weatherResponse;
+        }
+
+        public async Task<WeatherResponse> GetWeatherResponseByLocation()
+        {
+            try
+            {
+                Location location = await Geolocation.Default.GetLastKnownLocationAsync();
+
+                if (location != null)
+                {
+                    
+                    Uri uri = new Uri($"https://api.openweathermap.org/data/2.5/weather?lat={location.Latitude}&lon={location.Longitude}&appid={apiKey}");
+
+                    HttpResponseMessage response = await httpClient.GetAsync(uri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string content = await response.Content.ReadAsStringAsync();
+                        WeatherResponse weatherResponse = JsonSerializer.Deserialize<WeatherResponse>(content, JsonSerializerOptions);
+                        return weatherResponse;
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("Localização não encontrada.");
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                Debug.WriteLine($"Geolocalização não suportada: {fnsEx.Message}");
+            }
+            catch (FeatureNotEnabledException fneEx)
+            {
+                Debug.WriteLine($"Geolocalização não ativada: {fneEx.Message}");
+            }
+            catch (PermissionException pEx)
+            {
+                Debug.WriteLine($"Permissões de localização negadas: {pEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erro ao obter dados da API: {ex.Message}");
+            }
+
+            //Retorna um objeto padrão em caso de falha
+            return new WeatherResponse();
         }
 
     }

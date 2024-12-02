@@ -4,9 +4,9 @@
              x:Class="OpenWeatherAPI.Views.WeatherView"
              Title="Previsão do tempo"
              BackgroundImageSource="ceu2.jpg">
-    <!---B7D5E5-->
+    <!--- B7D5E5 | fundo: 9CC4DF | botão: 3F87BC-->
     <VerticalStackLayout Padding="30,0" Spacing="25">
-        <Frame BackgroundColor="#9CC4DF"
+        <Frame BackgroundColor="#3F87BC"
                Padding="0"
                Margin="0,100,0,0"
                BorderColor="White"
@@ -15,7 +15,7 @@
                WidthRequest="{OnIdiom Desktop=450}"
                HeightRequest="{OnIdiom Desktop=450}">
 
-            <VerticalStackLayout Spacing="30" HorizontalOptions="Center">
+            <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
                 <Frame BackgroundColor="white"
                        Padding="0"
                        BorderColor="Transparent" 
@@ -40,13 +40,14 @@
                         <Button Text="Pesquisar" 
                                 Command="{Binding GetCityWeather}"
                                 WidthRequest="{OnIdiom Desktop=100}"
-                                BackgroundColor="#3F87BC"
+                                BackgroundColor="#11548F"
                                 Margin="300,0,0,0"
                                 />
 
                     </AbsoluteLayout>
                 </Frame>
 
+                
                 <!-- Nome da cidade explícito no resultado: Binding{CityName} -->
                 <Label Text="{Binding CityName}"
                        FontSize="{OnIdiom Desktop=40}"
@@ -54,52 +55,56 @@
                        FontAttributes="Bold"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
-                    />
-
+                       />
                 <!-- Ensolarado -->
-                <Label Text="{Binding WeatherForecast}"
-                       FontSize="{OnIdiom Desktop=21}"
+                <Label Text="{Binding WeatherForecast, StringFormat='Previsão: {0}'}"
+                       FontSize="{OnIdiom Desktop=22}"
                        TextColor="white"
                        FontAttributes="Bold"
                        HorizontalOptions="Start"
                        VerticalOptions="Center"
                        />
+                <!-- {Binding WeatherIcon} -->
+                <Image
+                    Source="{Binding WeatherIcon}"
+                    HeightRequest="100"
+                    Aspect="AspectFit"
+                    HorizontalOptions="Start"/>
 
-                <!-- 32°C -->
-                <Label Text="{Binding DegreesCelsius}"
-                       FontSize="{OnIdiom Desktop=21}"
-                       TextColor="white"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Center"
-                       />
+                <VerticalStackLayout>
 
-                <!-- 35° -->
-                <Label Text="{Binding ThermalSensation}"
-                       FontSize="{OnIdiom Desktop=21}"
-                       TextColor="white"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Center"
-                       />   
+                    <!-- 32°C -->
+                    <Label Text="{Binding DegreesCelsius, StringFormat='Temperatura: {0}'}"
+                           FontSize="{OnIdiom Desktop=18}"
+                           TextColor="white"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           />
 
-                <!-- Umidade: 37% -->
-                <Label Text="{Binding Humidity}"
-                       FontSize="{OnIdiom Desktop=21}"
-                       TextColor="white"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Center"
-                    />
+                    <!-- 35° -->
+                    <Label Text="{Binding ThermalSensation, StringFormat='Sensação térmica: {0}'}"
+                           FontSize="{OnIdiom Desktop=18}"
+                           TextColor="white"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           />   
 
-                <!-- Vento: 16 km/h -->
-                <Label Text="{Binding Wind}"
-                       FontSize="{OnIdiom Desktop=21}"
-                       TextColor="white"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Center"
-                    />
+                    <!-- Umidade: 37% -->
+                    <Label Text="{Binding Humidity, StringFormat='Umidade: {0}'}"
+                           FontSize="{OnIdiom Desktop=18}"
+                           TextColor="white"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                        />
+
+                    <!-- Vento: 16 km/h -->
+                    <Label Text="{Binding Wind, StringFormat='Vento: {0}'}"
+                           FontSize="{OnIdiom Desktop=18}"
+                           TextColor="white"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                        />
+                </VerticalStackLayout>
 
             </VerticalStackLayout>
         </Frame>
