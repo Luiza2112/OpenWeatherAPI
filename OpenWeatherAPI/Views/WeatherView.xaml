@@ -12,8 +12,8 @@
                BorderColor="White"
                CornerRadius="10"
                HasShadow="False"
-               WidthRequest="{OnIdiom Desktop=450}"
-               HeightRequest="{OnIdiom Desktop=450}">
+               WidthRequest="{OnIdiom Desktop=450, Phone=300}"
+               HeightRequest="{OnIdiom Desktop=450, Phone=400}">
 
             <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
                 <Frame BackgroundColor="white"
@@ -22,35 +22,48 @@
                        CornerRadius="10"
                        HasShadow="False"
                        Margin="0,30,0,0"
-                       WidthRequest="{OnIdiom Desktop=400}"
-                       HeightRequest="{OnIdiom Desktop=45}">
+                       WidthRequest="{OnIdiom Desktop=400, Phone=260}"
+                       HeightRequest="{OnIdiom Desktop=45, Phone=35}">
                     <AbsoluteLayout>
                         <Entry Text ="{Binding CityName}"
                                Placeholder="Insira o nome da sua cidade..."
                                PlaceholderColor="black" 
-                               FontSize="{OnIdiom Desktop=16}"
+                               FontSize="{OnIdiom Desktop=16, Phone=12}"
                                TextColor="black" 
-                               WidthRequest="{OnIdiom Desktop=300}"
-                               HeightRequest="{OnIdiom Desktop=45}"
+                               WidthRequest="{OnIdiom Desktop=300, Phone=200}"
+                               HeightRequest="{OnIdiom Desktop=45, Phone=42}"
                                BackgroundColor="white"
                                />
                         <!-- HorizontalOptions="Center" -->
                         <!-- VerticalOptions="Center" -->
 
-                        <Button Text="Pesquisar" 
+                        <Button Text="Pesquisar"
+                                FontSize="{OnIdiom Desktop=16,Phone=10}"
+                                TextColor="White"
+                                CornerRadius="10"
+                                FontAttributes="Bold"
                                 Command="{Binding GetCityWeather}"
-                                WidthRequest="{OnIdiom Desktop=100}"
+                                WidthRequest="{OnIdiom Desktop=105, Phone=78}"
+                                HeightRequest="{OnIdiom Desktop=40, Phone=33}"
                                 BackgroundColor="#11548F"
-                                Margin="300,0,0,0"
-                                />
+                                >
+
+                                <Button.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="Android">180,0,0,0</On>
+                                    <On Platform="WinUI">293,0,0,0</On>
+                                    </OnPlatform>
+                                </Button.Margin>
+
+                        </Button>
+                        <!--Margin Desktop="300,0,0,0" Phone="188,0,0,0" -->
 
                     </AbsoluteLayout>
                 </Frame>
 
-                
                 <!-- Nome da cidade explícito no resultado: Binding{CityName} -->
                 <Label Text="{Binding CityName}"
-                       FontSize="{OnIdiom Desktop=40}"
+                       FontSize="{OnIdiom Desktop=40, Phone=25}"
                        TextColor="white"
                        FontAttributes="Bold"
                        HorizontalOptions="Center"
@@ -58,16 +71,17 @@
                        />
                 <!-- Ensolarado -->
                 <Label Text="{Binding WeatherForecast, StringFormat='Previsão: {0}'}"
-                       FontSize="{OnIdiom Desktop=22}"
+                       FontSize="{OnIdiom Desktop=22, Phone=16}"
                        TextColor="white"
                        FontAttributes="Bold"
                        HorizontalOptions="Start"
                        VerticalOptions="Center"
                        />
+                
                 <!-- {Binding WeatherIcon} -->
                 <Image
                     Source="{Binding WeatherIcon}"
-                    HeightRequest="100"
+                    HeightRequest="{OnIdiom Desktop=100, Phone=120}"
                     Aspect="AspectFit"
                     HorizontalOptions="Start"/>
 
@@ -75,7 +89,7 @@
 
                     <!-- 32°C -->
                     <Label Text="{Binding DegreesCelsius, StringFormat='Temperatura: {0}'}"
-                           FontSize="{OnIdiom Desktop=18}"
+                           FontSize="{OnIdiom Desktop=18, Phone=13}"
                            TextColor="white"
                            HorizontalOptions="Start"
                            VerticalOptions="Center"
@@ -83,7 +97,7 @@
 
                     <!-- 35° -->
                     <Label Text="{Binding ThermalSensation, StringFormat='Sensação térmica: {0}'}"
-                           FontSize="{OnIdiom Desktop=18}"
+                           FontSize="{OnIdiom Desktop=18, Phone=13}"
                            TextColor="white"
                            HorizontalOptions="Start"
                            VerticalOptions="Center"
@@ -91,7 +105,7 @@
 
                     <!-- Umidade: 37% -->
                     <Label Text="{Binding Humidity, StringFormat='Umidade: {0}'}"
-                           FontSize="{OnIdiom Desktop=18}"
+                           FontSize="{OnIdiom Desktop=18, Phone=13}"
                            TextColor="white"
                            HorizontalOptions="Start"
                            VerticalOptions="Center"
@@ -99,7 +113,7 @@
 
                     <!-- Vento: 16 km/h -->
                     <Label Text="{Binding Wind, StringFormat='Vento: {0}'}"
-                           FontSize="{OnIdiom Desktop=18}"
+                           FontSize="{OnIdiom Desktop=18, Phone=13}"
                            TextColor="white"
                            HorizontalOptions="Start"
                            VerticalOptions="Center"

@@ -72,8 +72,8 @@ namespace OpenWeatherAPI.ViewModels
             ThermalSensation = Math.Round(WeatherResponse.main.feels_like - 273).ToString() + "ºC";
 
             Humidity = WeatherResponse.main.humidity.ToString() + "%";
-
-            Wind = WeatherResponse.wind.speed.ToString() + "km/h";
+            //Converter m/s para km/h
+            Wind = Math.Round(WeatherResponse.wind.speed * 3.6).ToString() + "km/h";
 
         }
 
