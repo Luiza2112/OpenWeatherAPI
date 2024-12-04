@@ -5,6 +5,10 @@
              x:Class="OpenWeatherAPI.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Style TargetType="Shell">
+                <Setter Property="BackgroundColor" Value="#FF11548F" />
+                <Setter Property="TitleColor" Value="White" />
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />

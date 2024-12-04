@@ -13,7 +13,7 @@
                CornerRadius="10"
                HasShadow="False"
                WidthRequest="{OnIdiom Desktop=450, Phone=300}"
-               HeightRequest="{OnIdiom Desktop=450, Phone=400}">
+               HeightRequest="{OnIdiom Desktop=480, Phone=400}">
 
             <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
                 <Frame BackgroundColor="white"
@@ -48,17 +48,18 @@
                                 BackgroundColor="#11548F"
                                 >
 
-                                <Button.Margin>
-                                    <OnPlatform x:TypeArguments="Thickness">
-                                        <On Platform="Android">180,0,0,0</On>
+                            <Button.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="Android">180,0,0,0</On>
                                     <On Platform="WinUI">293,0,0,0</On>
-                                    </OnPlatform>
-                                </Button.Margin>
+                                </OnPlatform>
+                            </Button.Margin>
 
                         </Button>
                         <!--Margin Desktop="300,0,0,0" Phone="188,0,0,0" -->
-
+                        
                     </AbsoluteLayout>
+
                 </Frame>
 
                 <!-- Nome da cidade explícito no resultado: Binding{CityName} -->
@@ -68,7 +69,10 @@
                        FontAttributes="Bold"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
+                       LineBreakMode="TailTruncation"
+                       MaximumWidthRequest="{OnIdiom Desktop=400, Phone=230}"
                        />
+                
                 <!-- Ensolarado -->
                 <Label Text="{Binding WeatherForecast, StringFormat='Previsão: {0}'}"
                        FontSize="{OnIdiom Desktop=22, Phone=16}"
@@ -79,11 +83,25 @@
                        />
                 
                 <!-- {Binding WeatherIcon} -->
-                <Image
-                    Source="{Binding WeatherIcon}"
-                    HeightRequest="{OnIdiom Desktop=100, Phone=120}"
-                    Aspect="AspectFit"
-                    HorizontalOptions="Start"/>
+                <Frame
+                    BackgroundColor="#A1C8E6"
+                    CornerRadius="8"
+                    HasShadow="True"
+                    BorderColor="white"
+                    Padding="10"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    WidthRequest="{OnIdiom Desktop=130, Phone=110}"
+                    HeightRequest="{OnIdiom Desktop=130,Phone=110}"
+                    >
+                    <Image
+                        Source="{Binding WeatherIcon}"
+                        WidthRequest="{OnIdiom Desktop=100, Phone=100}"
+                        HeightRequest="{OnIdiom Desktop=100, Phone=90}"
+                        Aspect="AspectFit"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                </Frame>
 
                 <VerticalStackLayout>
 
